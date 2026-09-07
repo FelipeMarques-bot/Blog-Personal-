@@ -1,0 +1,2 @@
+const SB_URL = 'https://cqvjnvncsozjypwthniu.supabase.co';
+const SB_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxdmpudm5jc296anlwd3Robml1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMDMzODgsImV4cCI6MjA4OTg3OTM4OH0.-79nHbO209XReyNhahc8z37j5jaJ33nzwXimA-eQuBg';

@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070d">
+  <title>Painel do Personal | Admin</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <main class="auth-wrap" id="gate">
+    <div class="auth-card">
+      <a class="brand" href="./">
+        <img class="logo-img" src="assets/logo.png" alt="">
+        <span class="logo-text">PAINEL <span>DO PERSONAL</span></span>
+      </a>
+      <h1>ÁREA RESTRITA</h1>
+      <p class="hint-top">Acesso exclusivo do personal trainer.</p>
+      <div id="gate-erro" class="msg-error"></div>
+      <form id="form-admin">
+        <div class="field">
+          <label for="admin-email">E-mail</label>
+          <input type="email" id="admin-email" placeholder="admin@deleonfit.com" required>
+        </div>
+        <div class="field">
+          <label for="admin-senha">Senha</label>
+          <input type="password" id="admin-senha" placeholder="Senha" required>
+        </div>
+        <button type="submit" class="btn btn-pink" style="width:100%;">ENTRAR NO PAINEL</button>
+      </form>
+      <a class="link-mini" href="./">Voltar para o site</a>
+    </div>
+  </main>
+
+  <div id="painel" style="display:none;">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <img class="logo-img" src="assets/logo.png" alt="">
+        <span class="logo-text">PAINEL <span>DO PERSONAL</span></span>
+      </a>
+      <nav>
+        <button class="btn btn-outline btn-sm btn-install" type="button">⤓ BAIXAR APP</button>
+        <button class="btn btn-outline btn-sm" id="btn-sair-admin">SAIR</button>
+      </nav>
+    </header>
+
+    <main class="page">
+      <div class="page-head">
+        <h1>GERENCIAR <em>ALUNOS</em></h1>
+      </div>
+
+      <div class="stats-row" id="resumo-stats"></div>
+
+      <div class="admin-tabs">
+        <button data-tab="alunos" class="active">ALUNOS</button>
+        <button data-tab="treinos">PUBLICAR TREINOS</button>
+        <button data-tab="config">CONFIGURAÇÕES</button>
+      </div>
+
+      <section id="tab-alunos">
+        <div class="table-wrap">
+          <table class="tb">
+            <thead>
+              <tr>
+                <th>Aluno</th><th>Status</th><th>Dias/sem.</th><th>Plano</th>
+                <th>Treinos no mês</th><th>Sequência</th><th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-alunos"></tbody>
+          </table>
+        </div>
+
+        <div class="panel-grid" style="margin-top:20px;">
+          <div class="card" id="card-form-aluno">
+            <h3 style="margin-bottom:14px;" id="titulo-form-aluno">NOVO ALUNO</h3>
+            <input type="hidden" id="edit-id">
+            <div class="row-2">
+              <div class="field">
+                <label>Nome completo</label>
+                <input type="text" id="al-nome" placeholder="Nome do aluno">
+              </div>
+              <div class="field">
+                <label>E-mail (login)</label>
+                <input type="email" id="al-email" placeholder="aluno@email.com">
+              </div>
+            </div>
+            <div class="row-2">
+              <div class="field">
+                <label>Senha inicial</label>
+                <input type="text" id="al-senha" placeholder="Ex.: 123456">
+              </div>
+              <div class="field">
+                <label>Treinos por semana (meta)</label>
+                <select id="al-dias">
+                  <option value="2">2 dias</option>
+                  <option value="3" selected>3 dias</option>
+                  <option value="4">4 dias</option>
+                  <option value="5">5 dias</option>
+                  <option value="6">6 dias</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn-neon btn-sm" id="btn-salvar-aluno">SALVAR ALUNO</button>
+              <button class="btn btn-outline btn-sm" id="btn-limpar-form" style="display:none;">CANCELAR EDIÇÃO</button>
+            </div>
+          </div>
+          <div class="card pink" style="border-color:rgba(255,45,149,.35);">
+            <h3 style="margin-bottom:10px;">ATENÇÃO</h3>
+            <p style="color:var(--muted);font-size:.92rem;line-height:1.7;">
+              Alunos com status <b style="color:#ffd54d;">PENDENTE</b> já podem entrar no app, mas veem
+              "treino em preparação" até você publicar o plano na aba PUBLICAR TREINOS.
+              Use <b>BLOQUEAR</b> para suspender o acesso de quem parou de pagar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-treinos" style="display:none;">
+        <div class="card" style="margin-bottom:18px;">
+          <div class="row-2" style="align-items:end;">
+            <div class="field" style="margin-bottom:0;">
+              <label>Aluno selecionado</label>
+              <select id="sel-aluno-plano"></select>
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label>Copiar plano de outro aluno</label>
+              <select id="sel-copiar"><option value="">— selecionar —</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card glow-neon" style="margin-bottom:18px;">
+          <div class="row-2">
+            <div class="field">
+              <label>Título do plano</label>
+              <input type="text" id="pl-titulo" placeholder="Ex.: Hipertrofia - Setembro">
+            </div>
+            <div class="field">
+              <label>Objetivo</label>
+              <input type="text" id="pl-objetivo" placeholder="Ex.: Ganho de massa muscular">
+            </div>
+          </div>
+        </div>
+
+        <div id="editor-semanas"></div>
+
+        <div style="display:flex;gap:12px;margin-top:6px;flex-wrap:wrap;">
+          <button class="btn btn-neon" id="btn-salvar-plano">PUBLICAR PLANO</button>
+          <button class="btn btn-pink" id="btn-limpar-plano">LIMPAR PLANO DESTE ALUNO</button>
+        </div>
+      </section>
+
+      <section id="tab-config" style="display:none;">
+        <div class="panel-grid">
+          <div class="card cyan" style="border-color:rgba(0,229,255,.3);">
+            <h3 style="margin-bottom:14px;">CONFIGURAÇÕES GERAIS</h3>
+            <div class="field">
+              <label>Número do WhatsApp (com DDI/DDE, só números)</label>
+              <input type="text" id="cfg-whats" placeholder="5555997135782">
+            </div>
+            <div class="field">
+              <label>Mensagens motivacionais (uma por linha)</label>
+              <textarea id="cfg-frases" rows="6"></textarea>
+            </div>
+            <button class="btn btn-cyan btn-sm" id="btn-salvar-config">SALVAR CONFIGURAÇÕES</button>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:14px;">ACESSO ADMIN</h3>
+            <div class="field">
+              <label>E-mail atual</label>
+              <input type="email" id="cfg-admin-email">
+            </div>
+            <div class="field">
+              <label>Senha atual (para confirmar)</label>
+              <input type="password" id="cfg-admin-atual" placeholder="Senha atual">
+            </div>
+            <div class="field">
+              <label>Nova senha (deixe vazio para manter)</label>
+              <input type="password" id="cfg-admin-nova" placeholder="Nova senha">
+            </div>
+            <button class="btn btn-neon btn-sm" id="btn-salvar-admin">ATUALIZAR ACESSO</button>
+            <hr style="border:none;border-top:1px dashed var(--line);margin:22px 0;">
+            <h3 style="margin-bottom:10px;color:var(--pink);">ZONA DE RISCO</h3>
+            <p style="color:var(--muted);font-size:.88rem;margin-bottom:12px;">Restaura alunos, treinos e check-ins de demonstração.</p>
+            <button class="btn btn-outline btn-sm" id="btn-reset" style="border-color:var(--pink);color:var(--pink);">RESTAURAR DADOS DEMO</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-progresso" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="mp-nome">PROGRESSO DO ALUNO</h3>
+        <button type="button" class="car-btn" id="mp-fechar" aria-label="Fechar">×</button>
+      </div>
+      <div class="stats-row mp-stats">
+        <div class="stat-card neon"><div><div class="label">Sequência atual</div><div class="value"><span id="mp-streak">0</span> <small>dias</small></div></div></div>
+        <div class="stat-card cyan"><div><div class="label">Recorde</div><div class="value"><span id="mp-recorde">0</span> <small>dias</small></div></div></div>
+        <div class="stat-card pink"><div><div class="label">Total acumulado</div><div class="value"><span id="mp-total">0</span> <small>treinos</small></div></div></div>
+      </div>
+      <div class="card" style="margin-top:14px;">
+        <h3 style="margin-bottom:14px;">TREINOS POR SEMANA (últimas 4)</h3>
+        <div id="mp-bars"></div>
+      </div>
+      <p style="color:var(--muted);font-size:.85rem;margin-top:12px;" id="mp-extra"></p>
+      <div id="mp-medidas" style="margin-top:6px;"></div>
+    </div>
+  </div>
+
+  <script src="js/pwa.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/cloud.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

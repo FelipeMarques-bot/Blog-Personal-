@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar | Área do Aluno</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="auth-wrap">
+    <div class="auth-card">
+      <a class="brand" href="./">
+        <img class="logo-img" src="assets/logo.png" alt="">
+        <span class="logo-text">DELEON<span>MARQUES</span></span>
+      </a>
+      <h1 id="titulo-form">ACESSO DO ALUNO</h1>
+      <p class="hint-top" id="sub-form">Entre com seu e-mail e senha para ver seu treino.</p>
+
+      <div id="erro" class="msg-error"></div>
+
+      <form id="form-login" autocomplete="on">
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com" required autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="Sua senha" required minlength="4" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-neon" style="width:100%;">ENTRAR</button>
+      </form>
+
+      <form id="form-cadastro" style="display:none;">
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome" required minlength="3">
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="cad-email">E-mail</label>
+            <input type="email" id="cad-email" placeholder="seu@email.com" required autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false">
+          </div>
+          <div class="field">
+            <label for="cad-senha">Senha</label>
+            <input type="password" id="cad-senha" placeholder="Crie uma senha" required minlength="4">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-pink" style="width:100%;">CRIAR CONTA</button>
+      </form>
+
+      <div id="painel-codigo" style="display:none;">
+        <p style="text-align:center;color:var(--muted);font-size:0.9rem;margin-bottom:12px;">
+          Enviamos um código de 6 dígitos para
+          <b style="color:var(--text);" id="email-alvo"></b>. Digite abaixo para confirmar.
+        </p>
+        <div class="code-box" id="caixa-demo">
+          Modo demonstração (sem servidor de e-mail): seu código é
+          <b id="codigo-demo">------</b>
+        </div>
+        <div class="field">
+          <label for="codigo">Código de verificação</label>
+          <input type="text" id="codigo" inputmode="numeric" maxlength="6" placeholder="- - - - - -" required>
+        </div>
+        <button type="button" id="btn-verificar" class="btn btn-cyan" style="width:100%;">VERIFICAR E ENTRAR</button>
+        <button type="button" id="btn-reenviar" class="link-mini" style="background:none;border:none;cursor:pointer;">Reenviar código</button>
+      </div>
+
+      <div id="tabs-area">
+        <div class="tabs" style="margin-top:22px;">
+          <button type="button" id="tab-entrar" class="active">Já sou aluno</button>
+          <button type="button" id="tab-criar">Criar conta</button>
+        </div>
+        <a class="link-mini" href="#" id="esqueci">Esqueci minha senha</a>
+        <a class="link-mini" href="./">Voltar para o site</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/cloud.js"></script>
+  <script>
+    document.querySelectorAll('img.logo-img').forEach(function (img) {
+      img.addEventListener('load', function () { img.classList.add('has'); });
+    });
+  </script>
+  <script src="js/login.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

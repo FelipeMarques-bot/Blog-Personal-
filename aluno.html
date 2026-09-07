@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070d">
+  <title>Meu Treino | Área do Aluno</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">
+      <img class="logo-img" src="assets/logo.png" alt="">
+      <span class="logo-text">DELEON<span>MARQUES</span></span>
+    </a>
+    <nav>
+      <span id="user-chip" style="color:var(--muted);font-size:0.88rem;font-weight:600;"></span>
+      <button class="btn btn-outline btn-sm" id="btn-sair">SAIR</button>
+    </nav>
+  </header>
+
+  <main class="page" id="conteudo" style="display:none;">
+
+    <div class="page-head">
+      <h1>BORA TREINAR, <em id="primeiro-nome">ALUNO</em></h1>
+      <div class="spacer"></div>
+    </div>
+
+      <div class="quick-actions">
+        <a class="btn btn-neon btn-sm" href="#today-card">MARCAR TREINO DE HOJE</a>
+        <a class="btn btn-outline btn-sm" href="#secao-plano">VER MEU PLANO</a>
+        <a class="btn btn-outline btn-sm" href="#secao-desempenho">MEU DESEMPENHO</a>
+        <a class="btn btn-wa btn-sm wa-link" href="#" target="_blank" rel="noopener">FALAR COM O PERSONAL</a>
+        <button class="btn btn-outline btn-sm btn-install" type="button">⤓ BAIXAR APP</button>
+      </div>
+
+    <div id="sem-plano" style="display:none;">
+      <div class="card empty-state">
+        <h3>TREINO EM PREPARAÇÃO</h3>
+        <p>Sua conta foi criada, mas o personal ainda vai publicar seu plano de treino deste mês.<br>Fique de olho: em breve estará tudo aqui.</p>
+        <a class="btn btn-wa wa-link" href="#" target="_blank" rel="noopener">FALAR COM O PERSONAL</a>
+      </div>
+    </div>
+
+    <div id="com-plano">
+
+      <div id="banner-msg" class="banner-msg info"></div>
+
+      <div class="stats-row">
+        <div class="stat-card neon">
+          <div>
+            <div class="label">Sequência atual</div>
+            <div class="value"><span id="st-streak">0</span> <small>dias</small></div>
+          </div>
+        </div>
+        <div class="stat-card cyan">
+          <div class="ring" id="ring-semana" data-text="0/0"></div>
+          <div>
+            <div class="label">Esta semana</div>
+            <div class="value" id="st-semana-txt" style="font-size:1.1rem;">0 de 0 treinos</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div style="flex:1;">
+            <div class="label">Progresso do mês</div>
+            <div class="value" style="font-size:1rem;margin-bottom:8px;" id="st-mes-txt">0 / 0 treinos</div>
+            <div class="progress-line"><i id="barra-mes" style="width:0%;"></i></div>
+          </div>
+        </div>
+        <div class="stat-card pink">
+          <div>
+            <div class="label">Total acumulado</div>
+            <div class="value"><span id="st-total">0</span> <small>treinos</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="today-card" id="today-card">
+        <div>
+          <div class="date" id="hoje-data"></div>
+          <h2 id="hoje-foco">TREINO DE HOJE</h2>
+          <p class="focus-sub" id="hoje-sub"></p>
+        </div>
+        <div>
+          <button class="checkin-btn" id="btn-checkin">MARCAR TREINO FEITO</button>
+          <button class="undo-link" id="btn-desmarcar" style="display:none;">desmarcar check-in de hoje</button>
+        </div>
+      </div>
+
+      <div class="rest-card card" id="rest-card">
+        <div class="rest-top">
+          <h3>TIMER DE <span style="color:var(--cyan);">DESCANSO</span></h3>
+          <span style="color:var(--muted);font-size:.78rem;">Continua contando mesmo com a tela bloqueada</span>
+        </div>
+        <div class="rest-presets" id="rest-presets">
+          <button type="button" class="rest-preset" data-s="30">0:30</button>
+          <button type="button" class="rest-preset active" data-s="45">0:45</button>
+          <button type="button" class="rest-preset" data-s="60">1:00</button>
+          <button type="button" class="rest-preset" data-s="90">1:30</button>
+          <button type="button" class="rest-preset" data-s="120">2:00</button>
+        </div>
+        <div class="rest-main">
+          <div class="rest-display" id="rest-display">0:45</div>
+          <div style="display:flex;gap:10px;">
+            <button class="checkin-btn" id="rest-start" type="button">INICIAR DESCANSO</button>
+            <button class="undo-link" id="rest-stop" type="button" style="align-self:center;">cancelar</button>
+          </div>
+        </div>
+        <div class="progress-line"><i id="rest-bar" style="width:0%;"></i></div>
+      </div>
+
+      <section class="como-section" style="margin-top:30px;">
+        <h3 class="mini-title">COMO <span style="color:var(--neon);">FUNCIONA</span></h3>
+        <div class="como-strip">
+          <div class="como-step"><b>1</b><span>Veja o treino indicado para hoje</span></div>
+          <div class="como-step"><b>2</b><span>Treine e marque o check-in aqui no app</span></div>
+          <div class="como-step"><b>3</b><span>Acompanhe sua constância semana a semana</span></div>
+          <div class="como-step"><b>4</b><span>Todo mês seu plano é renovado conforme sua evolução</span></div>
+        </div>
+      </section>
+
+      <div class="panel-grid">
+        <div class="card glow-neon">
+          <h3 style="margin-bottom:14px;">SEU MÊS EM <span style="color:var(--neon);">NÚMEROS</span></h3>
+          <div class="cal" id="calendario"></div>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:10px;">RESUMO DA SEMANA</h3>
+          <p id="resumo-semana" style="color:var(--muted);line-height:1.6;font-size:0.92rem;"></p>
+        </div>
+      </div>
+
+      <section style="margin-top:34px;" id="secao-plano">
+        <div class="page-head">
+          <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);" id="plano-titulo">MEU PLANO</h2>
+          <div class="spacer"></div>
+          <span style="color:var(--muted);font-size:0.85rem;" id="plano-objetivo"></span>
+        </div>
+        <div class="week-tabs" id="week-tabs"></div>
+        <div class="treinos-head">
+          <span style="color:var(--muted);font-size:0.82rem;" id="car-count"></span>
+          <div class="car-nav">
+            <button type="button" class="car-btn" data-target="dias-grid" data-dir="-1" aria-label="Treino anterior">‹</button>
+            <button type="button" class="car-btn" data-target="dias-grid" data-dir="1" aria-label="Próximo treino">›</button>
+          </div>
+        </div>
+        <div class="carousel treinos-carousel" id="dias-grid"></div>
+        <div class="car-dots" id="car-dots"></div>
+      </section>
+
+      <section style="margin-top:34px;display:none;" id="secao-desempenho">
+        <div class="page-head">
+          <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);">SEU <em>DESEMPENHO</em></h2>
+          <div class="spacer"></div>
+          <span style="color:var(--muted);font-size:0.85rem;">Constância dos últimos treinos</span>
+        </div>
+        <div class="desempenho-grid">
+          <div class="card dp-minis">
+            <div class="dp-mini"><div class="label">Recorde de sequência</div><div class="value"><span id="dp-recorde">0</span> <small>dias</small></div></div>
+            <div class="dp-mini"><div class="label">Média semanal (últimas 4)</div><div class="value"><span id="dp-media">0</span> <small>treinos</small></div></div>
+            <div class="dp-mini"><div class="label">Meta do mês</div><div class="value"><span id="dp-meta">0%</span></div></div>
+          </div>
+        </div>
+
+        <div class="card cargas-card" style="margin-top:16px;">
+          <h3 style="margin-bottom:6px;">EVOLUÇÃO DE <span style="color:var(--neon);">CARGAS</span></h3>
+          <p style="color:var(--muted);font-size:0.85rem;margin-bottom:14px;">Anote o peso no campo "kg" de cada exercício. Aqui aparece a comparação do primeiro registro com o mais recente.</p>
+          <div id="cargas-resumo"></div>
+        </div>
+
+        <div class="card medidas-card" style="margin-top:16px;">
+          <h3 style="margin-bottom:6px;">MEDIDAS E <span style="color:var(--cyan);">PESO</span></h3>
+          <p style="color:var(--muted);font-size:0.85rem;margin-bottom:14px;">Registre sua evolução. Cada nova medição é comparada automaticamente com a anterior.</p>
+          <form id="form-medida" autocomplete="off">
+            <div class="medida-grid">
+              <div class="field">
+                <label for="md-data">Data</label>
+                <input type="date" id="md-data" required>
+              </div>
+              <div class="field">
+                <label for="md-peso">Peso (kg) *</label>
+                <input type="number" id="md-peso" inputmode="decimal" step="0.1" min="25" max="300" placeholder="Ex.: 78,5">
+              </div>
+              <div class="field">
+                <label for="md-peito">Peito (cm)</label>
+                <input type="number" id="md-peito" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+              <div class="field">
+                <label for="md-cintura">Cintura (cm)</label>
+                <input type="number" id="md-cintura" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+              <div class="field">
+                <label for="md-quadril">Quadril (cm)</label>
+                <input type="number" id="md-quadril" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+              <div class="field">
+                <label for="md-braco-d">Braço direito (cm)</label>
+                <input type="number" id="md-braco-d" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+              <div class="field">
+                <label for="md-braco-e">Braço esquerdo (cm)</label>
+                <input type="number" id="md-braco-e" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+              <div class="field">
+                <label for="md-coxa-d">Coxa direita (cm)</label>
+                <input type="number" id="md-coxa-d" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+              <div class="field">
+                <label for="md-coxa-e">Coxa esquerda (cm)</label>
+                <input type="number" id="md-coxa-e" inputmode="decimal" step="0.1" min="0" placeholder="—">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-cyan btn-sm">REGISTRAR MEDIÇÃO</button>
+          </form>
+
+          <div class="medida-tendencia" id="medida-tendencia"></div>
+          <h4 class="mini-title" style="margin-top:18px;">HISTÓRICO DE <span style="color:var(--neon);">MEDIÇÕES</span></h4>
+          <div id="medida-hist"></div>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="motiv-section" style="margin-top:34px;">
+      <h3 class="mini-title">FRASE DO <span style="color:var(--cyan);">DIA</span></h3>
+      <div class="card frase-dia-card">
+        <span class="fd-quote" aria-hidden="true">“</span>
+        <p id="frase-dia"></p>
+        <div class="fd-foot">
+          <span id="frase-dia-sub">Falta "vontade" todo mundo. Falta pouco quem aparece.</span>
+          <span class="fd-info" id="frase-dia-info"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <a class="wa-float wa-link" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16 .8C7.6.8.8 7.6.8 16c0 2.7.7 5.3 2 7.6L.9 31l7.5-1.9c2.2 1.2 4.8 1.9 7.6 1.9 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.7-.7-6.7-1.9l-.5-.3-4.4 1.1 1.2-4.3-.3-.5c-1.3-2-2-4.3-2-6.7C3.3 8.9 9 3.3 16 3.3S28.7 8.9 28.7 16 23 28.4 16 28.4zm7-9.4c-.4-.2-2.3-1.1-2.6-1.2-.3-.2-.6-.2-.8.1-.2.4-1 1.2-1.2 1.5-.2.3-.4.3-.8.1-.4-.2-1.6-.6-3-1.8-1.1-1-1.8-2.2-2-2.5-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.2-.4.4-.6.2-.2.1-.4 0-.6-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.3-.7-.5z"/></svg>
+  </a>
+
+  <script src="js/store.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/cloud.js"></script>
+  <script src="js/aluno.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

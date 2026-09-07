@@ -1,4 +1,4 @@
-const CACHE = 'deleonfit-v3';
+const CACHE = 'fitapp-v3';
 const IMG_RE = /\.(png|jpe?g|svg|webp|ico)$/i;
 
 self.addEventListener('install', function (e) {

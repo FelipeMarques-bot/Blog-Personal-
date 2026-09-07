@@ -160,8 +160,8 @@
 
   document.getElementById('esqueci').addEventListener('click', function (ev) {
     ev.preventDefault();
-    var num = (db.settings && db.settings.whatsapp) || '5555997135782';
-    var msg = encodeURIComponent('Olá Deleon! Esqueci minha senha da área do aluno.');
+    var num = (db.settings && db.settings.whatsapp) || '5511999999999';
+    var msg = encodeURIComponent('Olá Rafael! Esqueci minha senha da área do aluno.');
     window.open('https://wa.me/' + num + '?text=' + msg, '_blank');
     toast('Abrimos o WhatsApp para você pedir a redefinição.');
   });

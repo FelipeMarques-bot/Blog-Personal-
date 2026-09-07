@@ -11,14 +11,17 @@ jobs:
     steps:
       - name: Ping Supabase REST
         env:
-          SB_URL: https://cqvjnvncsozjypwthniu.supabase.co
+          SB_URL: ${{ vars.SUPABASE_URL }}
           SB_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          KEY="${SB_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxcmpudm5jc296anlwd3Robml1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ4Nzg1MzAsImV4cCI6MjA3MDQ1NDUzMH0.q2KJbFs9mgEPWtZ0DlS0w7x5LLvBnEBO5YoyYTBnRkA}"
+          if [ -z "$SB_URL" ] || [ -z "$SB_KEY" ]; then
+            echo "::warning::Configure SUPABASE_URL (vars) e SUPABASE_ANON_KEY (secrets) para o keep-alive funcionar."
+            exit 0
+          fi
           code=$(curl -s -o /dev/null -w "%{http_code}" \
-            -H "apikey: $KEY" \
-            -H "Authorization: Bearer $KEY" \
-            "$SB_URL/rest/v1/deleon_config?select=chave&limit=1")
+            -H "apikey: $SB_KEY" \
+            -H "Authorization: Bearer $SB_KEY" \
+            "$SB_URL/rest/v1/fitapp_config?select=chave&limit=1")
           echo "HTTP $code"
           if [ "$code" != "200" ]; then
             echo "::warning::Supabase respondeu HTTP $code (projeto pode estar pausado)"

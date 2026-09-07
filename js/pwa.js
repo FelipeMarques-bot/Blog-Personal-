@@ -27,14 +27,14 @@
   window.addEventListener('appinstalled', function () {
     deferredPrompt = null;
     refresh();
-    if (typeof toast === 'function') toast('App instalado! Procure o ícone Deleon Fit na sua tela.');
+    if (typeof toast === 'function') toast('App instalado! Procure o ícone FitApp na sua tela.');
   });
 
   function abrirInstrucoes() {
     var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && 'ontouchend' in document);
     var passos = ios
-      ? ['Abra este site no <b>Safari</b>.', 'Toque no ícone <b>Compartilhar</b> (quadrado com seta para cima, na barra de baixo).', 'Role a lista e toque em <b>"Adicionar à Tela de Início"</b>.', 'Confirme em <b>Adicionar</b>. O ícone Deleon Fit aparece na sua tela.']
-      : ['Toque no menu do navegador (três pontos ⋮).', 'Escolha <b>"Instalar aplicativo"</b> ou <b>"Adicionar à tela inicial"</b>.', 'Confirme. O ícone Deleon Fit aparece na sua tela.'];
+      ? ['Abra este site no <b>Safari</b>.', 'Toque no ícone <b>Compartilhar</b> (quadrado com seta para cima, na barra de baixo).', 'Role a lista e toque em <b>"Adicionar à Tela de Início"</b>.', 'Confirme em <b>Adicionar</b>. O ícone FitApp aparece na sua tela.']
+      : ['Toque no menu do navegador (três pontos ⋮).', 'Escolha <b>"Instalar aplicativo"</b> ou <b>"Adicionar à tela inicial"</b>.', 'Confirme. O ícone FitApp aparece na sua tela.'];
 
     var overlay = document.createElement('div');
     overlay.id = 'pwa-overlay';

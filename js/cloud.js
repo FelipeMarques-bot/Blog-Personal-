@@ -41,11 +41,11 @@
 
   function avisarOffline() {
     try {
-      var ultimo = Number(localStorage.getItem('deleonfit_aviso_offline_em') || 0);
+      var ultimo = Number(localStorage.getItem('fitapp_aviso_offline_em') || 0);
       if (Date.now() - ultimo > 3600000) {
-        localStorage.setItem('deleonfit_aviso_offline_em', String(Date.now()));
+        localStorage.setItem('fitapp_aviso_offline_em', String(Date.now()));
         if (typeof toast === 'function') {
-          toast('Nuvem indisponível agora. Os dados continuam sendo salvos neste dispositivo.', 'pink');
+          toast('Nuvem indisponÃ­vel agora. Os dados continuam sendo salvos neste dispositivo.', 'pink');
         }
       }
     } catch (e) {}
@@ -91,9 +91,9 @@
   async function pushAluno(aluno, db) {
     try {
       if (UUID_RE.test(aluno.id)) {
-        await req('PATCH', 'deleon_alunos', 'id=eq.' + aluno.id, toRow(aluno));
+        await req('PATCH', 'fitapp_alunos', 'id=eq.' + aluno.id, toRow(aluno));
       } else {
-        const rows = await req('POST', 'deleon_alunos', null, toRow(aluno));
+        const rows = await req('POST', 'fitapp_alunos', null, toRow(aluno));
         if (rows && rows[0]) {
           const salvo = fromRow(rows[0]);
           Object.assign(aluno, { id: salvo.id, criadoEm: salvo.criadoEm });
@@ -107,11 +107,11 @@
     ready: (async () => {
       try {
         const [alunosRows, checkinsRows, configRows, medidasRows, cargasRows] = await Promise.all([
-          req('GET', 'deleon_alunos', 'select=*'),
-          req('GET', 'deleon_checkins', 'select=*'),
-          req('GET', 'deleon_config', 'select=*'),
-          req('GET', 'deleon_medidas', 'select=*').catch(function () { return []; }),
-          req('GET', 'deleon_cargas', 'select=*').catch(function () { return []; })
+          req('GET', 'fitapp_alunos', 'select=*'),
+          req('GET', 'fitapp_checkins', 'select=*'),
+          req('GET', 'fitapp_config', 'select=*'),
+          req('GET', 'fitapp_medidas', 'select=*').catch(function () { return []; }),
+          req('GET', 'fitapp_cargas', 'select=*').catch(function () { return []; })
         ]);
         const db = loadDB();
         const cacheAntigo = db.alunos || [];
@@ -164,37 +164,37 @@
     },
 
     buscarAluno: function (email) {
-      return req('GET', 'deleon_alunos', 'email=ilike.' + encodeURIComponent(String(email || '').trim()))
+      return req('GET', 'fitapp_alunos', 'email=ilike.' + encodeURIComponent(String(email || '').trim()))
         .then(function (rows) { return rows && rows[0] ? fromRow(rows[0]) : null; })
         .catch(function () { return null; });
     },
 
     delAluno: function (aluno) {
       Promise.all([
-        req('DELETE', 'deleon_checkins', 'aluno_email=eq.' + encodeURIComponent(aluno.email), null),
-        req('DELETE', 'deleon_medidas', 'aluno_email=eq.' + encodeURIComponent(aluno.email), null),
-        req('DELETE', 'deleon_cargas', 'aluno_email=eq.' + encodeURIComponent(aluno.email), null),
-        req('DELETE', 'deleon_alunos', 'id=eq.' + aluno.id, null)
+        req('DELETE', 'fitapp_checkins', 'aluno_email=eq.' + encodeURIComponent(aluno.email), null),
+        req('DELETE', 'fitapp_medidas', 'aluno_email=eq.' + encodeURIComponent(aluno.email), null),
+        req('DELETE', 'fitapp_cargas', 'aluno_email=eq.' + encodeURIComponent(aluno.email), null),
+        req('DELETE', 'fitapp_alunos', 'id=eq.' + aluno.id, null)
       ]).catch(function (e) { console.warn('cloud delAluno', e); });
     },
 
     addCheckin: function (email, data) {
-      req('POST', 'deleon_checkins', null, { aluno_email: email, data: data })
+      req('POST', 'fitapp_checkins', null, { aluno_email: email, data: data })
         .catch(function (e) {
           if (String(e).indexOf('409') === -1) console.warn('cloud addCheckin', e);
         });
     },
 
     delCheckin: function (email, data) {
-      req('DELETE', 'deleon_checkins', 'aluno_email=eq.' + encodeURIComponent(email) + '&data=eq.' + data, null)
+      req('DELETE', 'fitapp_checkins', 'aluno_email=eq.' + encodeURIComponent(email) + '&data=eq.' + data, null)
         .catch(function (e) { console.warn('cloud delCheckin', e); });
     },
 
     addMedida: function (email, reg) {
       const payload = { aluno_email: email, data: reg.data, dados: reg };
-      req('POST', 'deleon_medidas', null, payload).catch(function (e) {
+      req('POST', 'fitapp_medidas', null, payload).catch(function (e) {
         if (String(e).indexOf('409') === -1) throw e;
-        return req('PATCH', 'deleon_medidas',
+        return req('PATCH', 'fitapp_medidas',
           'aluno_email=eq.' + encodeURIComponent(email) + '&data=eq.' + reg.data,
           { dados: reg });
       }).then(function (rows) {
@@ -209,25 +209,25 @@
       const query = reg.cid && UUID_RE.test(String(reg.cid))
         ? 'id=eq.' + reg.cid
         : 'aluno_email=eq.' + encodeURIComponent(email) + '&data=eq.' + reg.data;
-      req('DELETE', 'deleon_medidas', query, null)
+      req('DELETE', 'fitapp_medidas', query, null)
         .catch(function (e) { console.warn('cloud delMedida', e); });
     },
 
     setCarga: function (email, exercicio, historico) {
       const agora = new Date().toISOString();
       const payload = { aluno_email: email, exercicio: exercicio, historico: historico, atualizado_em: agora };
-      req('POST', 'deleon_cargas', null, payload).catch(function (e) {
+      req('POST', 'fitapp_cargas', null, payload).catch(function (e) {
         if (String(e).indexOf('409') === -1) throw e;
-        return req('PATCH', 'deleon_cargas',
+        return req('PATCH', 'fitapp_cargas',
           'aluno_email=eq.' + encodeURIComponent(email) + '&exercicio=eq.' + encodeURIComponent(exercicio),
           { historico: historico, atualizado_em: agora });
       }).then(function (rows) {
-        if (rows && rows[0] && UUID_RE.test(String(rows[0].id))) { /* uuid do cloud disponível */ }
+        if (rows && rows[0] && UUID_RE.test(String(rows[0].id))) { /* uuid do cloud disponÃ­vel */ }
       }).catch(function (e) { console.warn('cloud setCarga (salvo local)', e); });
     },
 
     pushConfig: function (chave, valor) {
-      req('POST', 'deleon_config', null, { chave: chave, valor: valor })
+      req('POST', 'fitapp_config', null, { chave: chave, valor: valor })
         .catch(function (e) { console.warn('cloud pushConfig', e); });
     },
 

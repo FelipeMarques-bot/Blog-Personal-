@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   var btnSair = document.getElementById('btn-sair');
   if (btnSair) {
     btnSair.addEventListener('click', function () {
@@ -31,8 +31,8 @@ CloudReady(function () {
   var semanaTab = Math.min(indiceSemanaMes(), (aluno.plano && aluno.plano.semanas ? aluno.plano.semanas.length : 4) - 1);
   var sugestao = treinoDoDia(aluno.plano);
 
-  var num = (db.settings && db.settings.whatsapp) || '5555997135782';
-  var msgWa = encodeURIComponent('Olá Deleon! Sou aluno e preciso falar com você.');
+  var num = (db.settings && db.settings.whatsapp) || '5511999999999';
+  var msgWa = encodeURIComponent('Olá Rafael! Sou aluno e preciso falar com você.');
   document.querySelectorAll('.wa-link').forEach(function (a) {
     a.href = 'https://wa.me/' + num + '?text=' + msgWa;
   });
@@ -521,8 +521,8 @@ CloudReady(function () {
   }
 
   function initTimer() {
-    var REST_KEY = 'deleonfit_rest_until';
-    var REST_DUR_KEY = 'deleonfit_rest_dur';
+    var REST_KEY = 'fitapp_rest_until';
+    var REST_DUR_KEY = 'fitapp_rest_dur';
     var TITULO_PAGINA = 'Meu Treino | Área do Aluno';
     var restTimer = null;
     var restWake = null;
@@ -597,8 +597,8 @@ CloudReady(function () {
         if (!('mediaSession' in navigator)) return;
         navigator.mediaSession.metadata = new MediaMetadata({
           title: 'Timer de descanso',
-          artist: decorrido != null ? ('Faltam ' + fmtRest(Math.max(0, Math.round(durSeg - decorrido)))) : 'Deleon Fit',
-          album: 'Deleon Marques',
+          artist: decorrido != null ? ('Faltam ' + fmtRest(Math.max(0, Math.round(durSeg - decorrido)))) : 'FitApp',
+          album: 'Rafael Lima',
           artwork: [
             { src: 'assets/icon-192.png', sizes: '192x192', type: 'image/png' },
             { src: 'assets/icon-512.png', sizes: '512x512', type: 'image/png' }
@@ -629,7 +629,7 @@ CloudReady(function () {
             reg.showNotification('\u23F0 Descanso encerrado!', {
               body: 'Bora para a pr\u00f3xima s\u00e9rie!',
               icon: 'assets/icon-192.png',
-              tag: 'deleonfit-rest',
+tag: 'fitapp-rest',
               requireInteraction: true
             });
           });
@@ -641,9 +641,9 @@ CloudReady(function () {
       try {
         if (!swRegRest || !('Notification' in window) || Notification.permission !== 'granted') return;
         swRegRest.showNotification('\u23F3 Descanso: ' + txt, {
-          body: 'Deleon Fit \u2022 treino em andamento',
+          body: 'FitApp \u2022 treino em andamento',
           icon: 'assets/icon-192.png',
-          tag: 'deleonfit-rest',
+          tag: 'fitapp-rest',
           silent: true
         });
       } catch (e) {}
@@ -652,7 +652,7 @@ CloudReady(function () {
     function fecharNotifRest() {
       try {
         if (!swRegRest) return;
-        swRegRest.getNotifications({ tag: 'deleonfit-rest' }).then(function (ns) {
+        swRegRest.getNotifications({ tag: 'fitapp-rest' }).then(function (ns) {
           ns.forEach(function (n) { n.close(); });
         }).catch(function () {});
       } catch (e) {}
@@ -696,7 +696,7 @@ CloudReady(function () {
       var left = Math.max(0, Math.ceil((until - Date.now()) / 1000));
       document.getElementById('rest-display').textContent = fmtRest(left);
       document.getElementById('rest-bar').style.width = Math.min(100, Math.round(((durSeg - left) / durSeg) * 100)) + '%';
-      document.title = '\u23F3 ' + fmtRest(left) + ' - descanso | Deleon Fit';
+      document.title = '\u23F3 ' + fmtRest(left) + ' - descanso | FitApp';
       atualizarMedia(durSeg, durSeg - left);
       if (left !== ultimoSegNotif && (left % 5 === 0 || left <= 10)) {
         ultimoSegNotif = left;

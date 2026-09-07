@@ -457,7 +457,7 @@ CloudReady(function () {
   }
 
   document.getElementById('btn-salvar-config').addEventListener('click', function () {
-    db.settings.whatsapp = document.getElementById('cfg-whats').value.replace(/\D/g, '') || '5555997135782';
+    db.settings.whatsapp = document.getElementById('cfg-whats').value.replace(/\D/g, '') || '5511999999999';
     db.settings.frases = document.getElementById('cfg-frases').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     saveDB(db);
     if (window.Cloud) window.Cloud.pushConfig('settings', db.settings);

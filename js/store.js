@@ -1,5 +1,5 @@
-const DB_KEY = 'deleonfit_db_v1';
-const WHATSAPP_PADRAO = '5555997135782';
+const DB_KEY = 'fitapp_db_v1';
+const WHATSAPP_PADRAO = '5511999999999';
 
 function uid() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -81,10 +81,10 @@ function seedDB() {
     semanas: []
   };
   const diasJoao = [
-    { dia: 'Segunda', foco: 'Peito e Tríceps', exercicios: ['Supino reto com barra - 4x10', 'Supino inclinado com halteres - 4x12', 'Crucifixo na máquina - 3x12', 'Tríceps testa - 4x12', 'Tríceps corda - 3x15'] },
-    { dia: 'Quarta', foco: 'Costas e Bíceps', exercicios: ['Barra fixa assistida - 4x8', 'Remada curvada - 4x10', 'Puxada frontal - 3x12', 'Rosca direta - 4x12', 'Rosca martelo - 3x12'] },
-    { dia: 'Sexta', foco: 'Pernas completo', exercicios: ['Agachamento livre - 4x10', 'Leg press 45 - 4x12', 'Cadeira extensora - 3x15', 'Mesa flexora - 3x12', 'Panturrilha em pé - 4x15'] },
-    { dia: 'Sábado', foco: 'Ombros e Core', exercicios: ['Desenvolvimento halteres - 4x10', 'Elevação lateral - 4x12', 'Encolhimento - 3x12', 'Prancha - 3x40s', 'Abdominal na polia - 3x15'] }
+    { dia: 'Segunda', foco: 'Peito e TrÃ­ceps', exercicios: ['Supino reto com barra - 4x10', 'Supino inclinado com halteres - 4x12', 'Crucifixo na mÃ¡quina - 3x12', 'TrÃ­ceps testa - 4x12', 'TrÃ­ceps corda - 3x15'] },
+    { dia: 'Quarta', foco: 'Costas e BÃ­ceps', exercicios: ['Barra fixa assistida - 4x8', 'Remada curvada - 4x10', 'Puxada frontal - 3x12', 'Rosca direta - 4x12', 'Rosca martelo - 3x12'] },
+    { dia: 'Sexta', foco: 'Pernas completo', exercicios: ['Agachamento livre - 4x10', 'Leg press 45 - 4x12', 'Cadeira extensora - 3x15', 'Mesa flexora - 3x12', 'Panturrilha em pÃ© - 4x15'] },
+    { dia: 'SÃ¡bado', foco: 'Ombros e Core', exercicios: ['Desenvolvimento halteres - 4x10', 'ElevaÃ§Ã£o lateral - 4x12', 'Encolhimento - 3x12', 'Prancha - 3x40s', 'Abdominal na polia - 3x15'] }
   ];
   for (let s = 1; s <= 4; s++) {
     planoJoao.semanas.push({
@@ -100,13 +100,13 @@ function seedDB() {
 
   const planoMaria = {
     titulo: 'Emagrecimento e Condicionamento',
-    objetivo: 'Perda de peso e definição',
+    objetivo: 'Perda de peso e definiÃ§Ã£o',
     semanas: []
   };
   const diasMaria = [
-    { dia: 'Segunda', foco: 'Circuitos full body A', exercicios: ['Agachamento com salto - 3x12', 'Flexão de braço - 3x10', 'Remada com halter - 3x12', 'Prancha - 3x30s', 'Bike 10min intensidade moderada'] },
+    { dia: 'Segunda', foco: 'Circuitos full body A', exercicios: ['Agachamento com salto - 3x12', 'FlexÃ£o de braÃ§o - 3x10', 'Remada com halter - 3x12', 'Prancha - 3x30s', 'Bike 10min intensidade moderada'] },
     { dia: 'Quarta', foco: 'HIIT + Core', exercicios: ['Burpee - 4x10', 'Mountain climber - 4x20', 'Polichinelo - 4x30', 'Abdominal bicicleta - 3x20', 'Esteira HIIT 15min'] },
-    { dia: 'Sexta', foco: 'Membros inferiores + cardio', exercicios: ['Afundo - 3x12 cada perna', 'Elevação pélvica - 3x15', 'Stiff com halteres - 3x12', 'Panturrilha - 3x20', 'Escada 12min'] }
+    { dia: 'Sexta', foco: 'Membros inferiores + cardio', exercicios: ['Afundo - 3x12 cada perna', 'ElevaÃ§Ã£o pÃ©lvica - 3x15', 'Stiff com halteres - 3x12', 'Panturrilha - 3x20', 'Escada 12min'] }
   ];
   for (let s = 1; s <= 4; s++) {
     planoMaria.semanas.push({
@@ -114,7 +114,7 @@ function seedDB() {
       dias: diasMaria.map((d) => ({
         dia: d.dia,
         foco: d.foco,
-        progressao: s === 1 ? 'Foco na técnica' : 'Reduza descanso para 40s',
+        progressao: s === 1 ? 'Foco na tÃ©cnica' : 'Reduza descanso para 40s',
         exercicios: [...d.exercicios]
       }))
     });
@@ -123,7 +123,7 @@ function seedDB() {
   const alunos = [
     {
       id: uid(),
-      nome: 'João Pereira',
+      nome: 'JoÃ£o Pereira',
       email: 'joao@email.com',
       senha: '123456',
       diasSemana: 4,
@@ -164,16 +164,16 @@ function seedDB() {
     settings: {
       whatsapp: WHATSAPP_PADRAO,
       frases: [
-        'Disciplina é escolher entre o que você quer agora e o que você quer mais.',
-        'O corpo alcança o que a mente acredita.',
-        'Você não precisa ser extremo, apenas consistente.',
-        'Cada treino é um tijolo na construção da sua melhor versão.',
-        'Ninguém se arrependeu do treino que fez. Só do que pulou.'
+        'Disciplina Ã© escolher entre o que vocÃª quer agora e o que vocÃª quer mais.',
+        'O corpo alcanÃ§a o que a mente acredita.',
+        'VocÃª nÃ£o precisa ser extremo, apenas consistente.',
+        'Cada treino Ã© um tijolo na construÃ§Ã£o da sua melhor versÃ£o.',
+        'NinguÃ©m se arrependeu do treino que fez. SÃ³ do que pulou.'
       ]
     },
     admin: {
-      email: 'admin@deleonfit.com',
-      senha: 'deleon2026'
+      email: 'admin@fitapp.com',
+      senha: 'rafael2026'
     }
   };
 }
@@ -266,7 +266,7 @@ function melhorSequencia(db, email) {
 }
 
 function contagemUltimasSemanas(db, email) {
-  const rotulos = ['Há 3 semanas', 'Há 2 semanas', 'Semana passada', 'Esta semana'];
+  const rotulos = ['HÃ¡ 3 semanas', 'HÃ¡ 2 semanas', 'Semana passada', 'Esta semana'];
   const out = [];
   for (let i = 3; i >= 0; i--) {
     const seg = new Date();
@@ -288,36 +288,36 @@ function ultimoTreino(db, email) {
 }
 
 var FRASES_PADRAO = [
-  'Disciplina é escolher entre o que você quer agora e o que você quer mais.',
-  'O corpo alcança o que a mente acredita.',
-  'Você não precisa ser extremo, apenas consistente.',
-  'Cada treino é um tijolo na construção da sua melhor versão.',
-  'Ninguém se arrependeu do treino que fez. Só do que pulou.',
+  'Disciplina Ã© escolher entre o que vocÃª quer agora e o que vocÃª quer mais.',
+  'O corpo alcanÃ§a o que a mente acredita.',
+  'VocÃª nÃ£o precisa ser extremo, apenas consistente.',
+  'Cada treino Ã© um tijolo na construÃ§Ã£o da sua melhor versÃ£o.',
+  'NinguÃ©m se arrependeu do treino que fez. SÃ³ do que pulou.',
   'A dor de treinar dura uma hora. A dor de desistir dura a vida inteira.',
-  'Motivação te faz começar. Hábito te faz continuar.',
-  'Se fosse fácil, todo mundo faria. Você não é todo mundo.',
-  'Um dia ruim de treino ainda é melhor que um dia perfeito sem treino.',
-  'Seu único adversário é quem você foi ontem.',
-  'Força não vem do que você pode fazer. Vem de superar aquilo que você não conseguia.',
-  'Não conte os dias. Faça os dias contarem.',
-  'O suor de hoje é a confiança de amanhã.',
-  'Desculpas não queimam calorias.',
-  'Você está a um treino de distância de um humor melhor.',
-  'Constância transforma mais que intensidade.',
-  'Comece onde você está. Use o que você tem. Faça o que você pode.',
-  'O progresso esconde-se nos dias em que ninguém está vendo.',
-  'Levantar-se e aparecer já é metade da vitória.',
-  'Treine porque você ama seu corpo, não porque odeia ele.',
-  'Pequenos passos diários vencem grandes saltos ocasionais.',
-  'Daqui a seis meses você vai desejar ter começado hoje.',
-  'Foco no processo. O resultado é consequência.',
+  'MotivaÃ§Ã£o te faz comeÃ§ar. HÃ¡bito te faz continuar.',
+  'Se fosse fÃ¡cil, todo mundo faria. VocÃª nÃ£o Ã© todo mundo.',
+  'Um dia ruim de treino ainda Ã© melhor que um dia perfeito sem treino.',
+  'Seu Ãºnico adversÃ¡rio Ã© quem vocÃª foi ontem.',
+  'ForÃ§a nÃ£o vem do que vocÃª pode fazer. Vem de superar aquilo que vocÃª nÃ£o conseguia.',
+  'NÃ£o conte os dias. FaÃ§a os dias contarem.',
+  'O suor de hoje Ã© a confianÃ§a de amanhÃ£.',
+  'Desculpas nÃ£o queimam calorias.',
+  'VocÃª estÃ¡ a um treino de distÃ¢ncia de um humor melhor.',
+  'ConstÃ¢ncia transforma mais que intensidade.',
+  'Comece onde vocÃª estÃ¡. Use o que vocÃª tem. FaÃ§a o que vocÃª pode.',
+  'O progresso esconde-se nos dias em que ninguÃ©m estÃ¡ vendo.',
+  'Levantar-se e aparecer jÃ¡ Ã© metade da vitÃ³ria.',
+  'Treine porque vocÃª ama seu corpo, nÃ£o porque odeia ele.',
+  'Pequenos passos diÃ¡rios vencem grandes saltos ocasionais.',
+  'Daqui a seis meses vocÃª vai desejar ter comeÃ§ado hoje.',
+  'Foco no processo. O resultado Ã© consequÃªncia.',
   'Nada muda se nada muda. Bora treinar.',
-  'Energia e persistência conquistam todas as coisas.',
-  'A barra não vai levantar sozinha.',
-  'Sua meta não vai correr atrás de você.',
+  'Energia e persistÃªncia conquistam todas as coisas.',
+  'A barra nÃ£o vai levantar sozinha.',
+  'Sua meta nÃ£o vai correr atrÃ¡s de vocÃª.',
   'Quem quer vence. Quem quer muito, treina mesmo cansado.',
-  'Hoje é o dia mais barato para investir na sua saúde.',
-  'Você não precisa de sorte. Precisa de constância.'
+  'Hoje Ã© o dia mais barato para investir na sua saÃºde.',
+  'VocÃª nÃ£o precisa de sorte. Precisa de constÃ¢ncia.'
 ];
 
 function fraseDoDia(db) {
@@ -333,7 +333,7 @@ function fraseDoDia(db) {
   var custom = (db.settings && db.settings.frases) ? db.settings.frases : [];
   custom.forEach(add);
   FRASES_PADRAO.forEach(function (f) { if (pool.length < 30) add(f); });
-  while (pool.length < 30) pool.push('Foco, força e fé.');
+  while (pool.length < 30) pool.push('Foco, forÃ§a e fÃ©.');
   var d = new Date();
   var dias = Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
   var idx = ((dias % pool.length) + pool.length) % pool.length;

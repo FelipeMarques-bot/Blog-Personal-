@@ -1,7 +1,7 @@
 {
-  "name": "Deleon Marques | Treino Personalizado",
-  "short_name": "Deleon Fit",
-  "description": "Área do aluno do personal trainer Deleon Marques: plano de treino mensal, check-in diário e evolução.",
+  "name": "Rafael Lima | Treino Personalizado",
+  "short_name": "FitApp",
+  "description": "Área do aluno do personal trainer Rafael Lima: plano de treino mensal, check-in diário e evolução.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

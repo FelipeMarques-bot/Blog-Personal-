@@ -1,4 +1,9 @@
-# Deleon Fit — App do Personal Trainer
+# FitApp — App do Personal Trainer (Template)
+
+> Projeto de exemplo criado para servir de **template**: troque o nome do personal,
+> o WhatsApp e as cores e publique para um novo treinador. As referências de marca
+> usam um nome fictício de demonstração (**Rafael Lima**) e um número de contato
+> placeholder (**+55 11 99999-9999**).
 
 Aplicação web completa (3 áreas em um só site, estilo academia com cores neon), publicada como **PWA instalável**:
 
@@ -8,9 +13,15 @@ Aplicação web completa (3 áreas em um só site, estilo academia com cores neo
 | Área do Aluno | `login.html` → `aluno.html` | Login com e-mail + senha + código de verificação, plano de treino mensal, check-in diário, métricas de evolução e **timer de descanso entre séries** |
 | Painel Admin | `admin.html` | Exclusivo do personal: cadastrar alunos, publicar/editar treinos, **acompanhar a progressão de cada aluno** (botão Progresso) |
 
+## Como reutilizar (novo projeto)
+
+1. **Nome do personal**: `index.html` usa "Rafael Lima" no logo, título, seção "sobre" e rodapé; `manifest.json` também tem o nome.
+2. **Contato / WhatsApp**: sem precisar de código — painel admin → aba **Configurações** → campo "Número do WhatsApp". O padrão (placeholder) também está em `js/store.js` (`WHATSAPP_PADRAO`).
+3. **Cores**: todas no `css/styles.css`, no bloco `:root` (`--neon`, `--cyan`, `--pink`, `--bg`, etc.). É só trocar ali.
+4. **Fotos**: substitua os arquivos em `assets/` (`blog-personal.jpg`, `foto-1.jpg`, `foto-2.jpg`, `car1/`, `car2/`) e o `assets/logo.png`.
+
 ## Site no ar
 
-- URL: **https://deleonfit.onrender.com**
 - Hospedagem: Render (site estático), deploy automático a cada push na branch `main`
 - Dados: banco **Supabase** (multi-dispositivo — aluno vê na hora o treino publicado pelo personal)
 
@@ -28,17 +39,17 @@ Aplicação web completa (3 áreas em um só site, estilo academia com cores neo
 
 ## Onde os dados ficam
 
-Supabase (projeto `cqvjnvncsozjypwthniu`), tabelas:
-- `deleon_alunos` — cadastro e plano mensal (jsonb)
-- `deleon_checkins` — check-ins diários
-- `deleon_config` — configurações gerais e credenciais do admin
+Supabase, tabelas (prefixo `fitapp_` no template):
+- `fitapp_alunos` — cadastro e plano mensal (jsonb)
+- `fitapp_checkins` — check-ins diários
+- `fitapp_config` — configurações gerais e credenciais do admin
 
 > Nota: as senhas são salvas em texto puro e legíveis pela chave pública do site. Para produção séria, migrar autenticação para Supabase Auth (senhas com hash).
 
 ## Estrutura
 
 ```
-deleon-fit/
+fitapp/
 ├── index.html              Blog público + carrosséis + WhatsApp
 ├── login.html              Login/cadastro + verificação
 ├── aluno.html              Dashboard do aluno (treino, check-in, timer)
@@ -58,5 +69,5 @@ deleon-fit/
 
 ## WhatsApp do personal
 
-Número configurado: **+55 55 997135782** (Deleon Marques).
+Número placeholder: **+55 11 99999-9999** (numero de exemplo — troque no painel).
 Para trocar: painel admin → aba **Configurações** → campo "Número do WhatsApp". Todos os botões do site atualizam sozinhos.
